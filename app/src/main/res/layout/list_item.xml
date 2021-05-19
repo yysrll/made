@@ -6,9 +6,11 @@
     android:layout_height="wrap_content"
     android:layout_marginBottom="8dp"
     android:orientation="vertical"
-    app:cardElevation="8dp">
+    app:cardElevation="2dp"
+    app:cardCornerRadius="8dp">
 
     <TextView
+        android:id="@+id/doa_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/doa_title"
