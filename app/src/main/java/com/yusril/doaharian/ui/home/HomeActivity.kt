@@ -12,24 +12,21 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.yusril.doaharian.R
 import com.yusril.doaharian.core.data.Resource
 import com.yusril.doaharian.core.ui.DoaAdapter
-import com.yusril.doaharian.core.ui.ViewModelFactory
 import com.yusril.doaharian.databinding.ActivityHomeBinding
 import com.yusril.doaharian.ui.detail.DetailActivity
 import com.yusril.doaharian.ui.favorite.FavoriteActivity
+import org.koin.android.viewmodel.ext.android.viewModel
 
 class HomeActivity : AppCompatActivity() {
 
     private var _binding: ActivityHomeBinding? = null
     private val binding get() = _binding!!
-    private lateinit var viewModel: HomeViewModel
+    private val viewModel: HomeViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         _binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        val factory = ViewModelFactory.getInstance(this)
-        viewModel = ViewModelProvider(this, factory)[HomeViewModel::class.java]
 
         val doaAdapter = DoaAdapter()
         doaAdapter.onItemClick = { selectedDoa ->

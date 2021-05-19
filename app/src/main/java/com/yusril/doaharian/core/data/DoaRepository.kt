@@ -14,7 +14,7 @@ import com.yusril.doaharian.core.utils.DataMapper
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
-class DoaRepository private constructor(
+class DoaRepository(
     private val remoteDataSource: RemoteDataSource,
     private val localDataSource: LocalDataSource,
     private val appExecutors: AppExecutors
@@ -45,21 +45,5 @@ class DoaRepository private constructor(
     override fun setFavoriteDoa(doa: Doa, state: Boolean) {
         val doaEntity = DataMapper.mapDomainToEntities(doa)
         appExecutors.diskIO().execute { localDataSource.setFavoriteDoa(doaEntity, state) }
-    }
-
-    companion object {
-        @Volatile
-        private var instance: DoaRepository? = null
-
-        fun getInstance(
-            remoteData: RemoteDataSource,
-            localData: LocalDataSource,
-            appExecutors: AppExecutors
-        ): DoaRepository =
-            instance ?: synchronized(this) {
-                instance ?: DoaRepository(remoteData, localData, appExecutors).apply {
-                    instance = this
-                }
-            }
     }
 }

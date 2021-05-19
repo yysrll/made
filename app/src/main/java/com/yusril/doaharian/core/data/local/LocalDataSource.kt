@@ -5,7 +5,7 @@ import com.yusril.doaharian.core.data.local.entity.DoaEntity
 import com.yusril.doaharian.core.data.local.room.DoaDao
 import kotlinx.coroutines.flow.Flow
 
-class LocalDataSource private constructor(private val doaDao: DoaDao) {
+class LocalDataSource(private val doaDao: DoaDao) {
 
     fun getAllDoa(): Flow<List<DoaEntity>> = doaDao.getAllDoa()
 
@@ -16,15 +16,6 @@ class LocalDataSource private constructor(private val doaDao: DoaDao) {
     fun setFavoriteDoa(doa: DoaEntity, state: Boolean) {
         doa.isFavorite = state
         doaDao.setFavoriteDoa(doa)
-    }
-
-    companion object {
-        private var instance: LocalDataSource? = null
-
-        fun getInstance(doaDao: DoaDao): LocalDataSource =
-            instance ?: synchronized(this) {
-                instance ?: LocalDataSource(doaDao)
-            }
     }
 
 }

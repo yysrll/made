@@ -11,21 +11,4 @@ abstract class DoaDatabase : RoomDatabase() {
 
     abstract fun doaDao(): DoaDao
 
-    companion object {
-        @Volatile
-        private var INSTANCE: DoaDatabase? = null
-
-        fun getInstance(context: Context): DoaDatabase =
-            INSTANCE ?: synchronized(this) {
-                val instance = Room.databaseBuilder(
-                    context.applicationContext,
-                    DoaDatabase::class.java,
-                    "DoaDB"
-                )
-                    .fallbackToDestructiveMigration()
-                    .build()
-                INSTANCE = instance
-                instance
-            }
-    }
 }

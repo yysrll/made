@@ -3,17 +3,15 @@ package com.yusril.doaharian.ui.detail
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.ViewModelProvider
 import com.yusril.doaharian.R
-import com.yusril.doaharian.core.data.local.entity.DoaEntity
 import com.yusril.doaharian.core.domain.model.Doa
-import com.yusril.doaharian.core.ui.ViewModelFactory
 import com.yusril.doaharian.databinding.ActivityDetailBinding
+import org.koin.android.viewmodel.ext.android.viewModel
 
 class DetailActivity : AppCompatActivity() {
 
-    private lateinit var viewModel: DetailViewModel
     private lateinit var binding: ActivityDetailBinding
+    private val viewModel: DetailViewModel by viewModel()
 
     companion object {
         const val DETAIL_DOA = "detail"
@@ -23,9 +21,6 @@ class DetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        val factory = ViewModelFactory.getInstance(this)
-        viewModel = ViewModelProvider(this, factory)[DetailViewModel::class.java]
 
         val detail = intent.getParcelableExtra<Doa>(DETAIL_DOA)
         showDetail(detail)
