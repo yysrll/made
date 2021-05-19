@@ -11,6 +11,8 @@ import com.yusril.doaharian.core.domain.model.Doa
 import com.yusril.doaharian.core.domain.repository.IDoaRepository
 import com.yusril.doaharian.core.utils.AppExecutors
 import com.yusril.doaharian.core.utils.DataMapper
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 
 class DoaRepository private constructor(
     private val remoteDataSource: RemoteDataSource,
@@ -18,29 +20,27 @@ class DoaRepository private constructor(
     private val appExecutors: AppExecutors
 ) : IDoaRepository{
 
-    override fun getAllDoa(): LiveData<Resource<List<Doa>>> =
-        object : NetworkBoundResource<List<Doa>, List<DoaResponses>>(appExecutors) {
-            override fun loadFromDB(): LiveData<List<Doa>> {
-                return Transformations.map(localDataSource.getAllDoa()) {
-                    DataMapper.mapEntitiesToDomain(it)
-                }
+    override fun getAllDoa(): Flow<Resource<List<Doa>>> =
+        object : NetworkBoundResource<List<Doa>, List<DoaResponses>>() {
+            override fun loadFromDB(): Flow<List<Doa>> {
+                return localDataSource.getAllDoa().map { DataMapper.mapEntitiesToDomain(it) }
             }
 
             override fun shouldFetch(data: List<Doa>?): Boolean =
                 data == null || data.isEmpty()
 
-            override fun createCall(): LiveData<ApiResponse<List<DoaResponses>>> =
+            override suspend fun createCall(): Flow<ApiResponse<List<DoaResponses>>> =
                 remoteDataSource.loadAllDoa()
 
-            override fun saveCallResult(data: List<DoaResponses>) {
+            override suspend fun saveCallResult(data: List<DoaResponses>) {
                 val doaList = DataMapper.mapResponseToEntities(data)
                 localDataSource.insertDoa(doaList)
             }
 
-        }.asLiveData()
+        }.asFlow()
 
-    override fun getFavoriteDoa(): LiveData<List<Doa>> =
-        Transformations.map(localDataSource.getFavoriteDoa()) { DataMapper.mapEntitiesToDomain(it) }
+    override fun getFavoriteDoa(): Flow<List<Doa>> =
+        localDataSource.getFavoriteDoa().map { DataMapper.mapEntitiesToDomain(it) }
 
     override fun setFavoriteDoa(doa: Doa, state: Boolean) {
         val doaEntity = DataMapper.mapDomainToEntities(doa)
