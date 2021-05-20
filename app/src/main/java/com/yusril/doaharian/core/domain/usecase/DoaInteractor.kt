@@ -4,9 +4,10 @@ import androidx.lifecycle.LiveData
 import com.yusril.doaharian.core.data.DoaRepository
 import com.yusril.doaharian.core.data.Resource
 import com.yusril.doaharian.core.domain.model.Doa
+import com.yusril.doaharian.core.domain.repository.IDoaRepository
 import kotlinx.coroutines.flow.Flow
 
-class DoaInteractor(private val doaRepository: DoaRepository): DoaUseCase {
+class DoaInteractor(private val doaRepository: IDoaRepository): DoaUseCase {
     override fun getAllDoa(): Flow<Resource<List<Doa>>> = doaRepository.getAllDoa()
 
     override fun getFavoriteDoa(): Flow<List<Doa>> = doaRepository.getFavoriteDoa()
