@@ -18,7 +18,7 @@ class DoaRepository(
     private val remoteDataSource: RemoteDataSource,
     private val localDataSource: LocalDataSource,
     private val appExecutors: AppExecutors
-) : IDoaRepository{
+) : IDoaRepository {
 
     override fun getAllDoa(): Flow<Resource<List<Doa>>> =
         object : NetworkBoundResource<List<Doa>, List<DoaResponses>>() {

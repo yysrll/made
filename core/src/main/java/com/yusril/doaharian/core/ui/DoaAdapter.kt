@@ -4,10 +4,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.yusril.doaharian.R
-import com.yusril.doaharian.core.data.local.entity.DoaEntity
+import com.yusril.doaharian.core.R
+import com.yusril.doaharian.core.databinding.ListItemBinding
 import com.yusril.doaharian.core.domain.model.Doa
-import com.yusril.doaharian.databinding.ListItemBinding
 
 class DoaAdapter: RecyclerView.Adapter<DoaAdapter.ListViewHolder>() {
 
