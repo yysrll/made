@@ -30,7 +30,7 @@ class HomeActivity : AppCompatActivity() {
         val doaAdapter = DoaAdapter()
         doaAdapter.onItemClick = { selectedDoa ->
             val i = Intent(this, DetailActivity::class.java)
-                i.putExtra(DetailActivity.DETAIL_DOA, selectedDoa)
+            i.putExtra(DetailActivity.DETAIL_DOA, selectedDoa)
             startActivity(i)
         }
 
@@ -45,7 +45,8 @@ class HomeActivity : AppCompatActivity() {
                     is Resource.Error -> {
                         binding.progressBar.visibility = View.GONE
                         binding.viewError.root.visibility = View.VISIBLE
-                        binding.viewError.tvError.text = doa.message ?: getString(R.string.something_wrong)
+                        binding.viewError.tvError.text =
+                            doa.message ?: getString(R.string.something_wrong)
                     }
                 }
             }
@@ -66,7 +67,7 @@ class HomeActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when(item.itemId) {
+        return when (item.itemId) {
             R.id.favorite_menu -> {
                 val uri = Uri.parse("doaharian://favorite")
                 startActivity(Intent(Intent.ACTION_VIEW, uri))

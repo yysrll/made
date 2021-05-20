@@ -25,4 +25,4 @@ data class DoaEntity(
     var isFavorite: Boolean,
 
 
-): Parcelable
+    ) : Parcelable

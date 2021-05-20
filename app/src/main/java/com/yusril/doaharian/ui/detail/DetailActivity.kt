@@ -44,9 +44,19 @@ class DetailActivity : AppCompatActivity() {
 
     private fun setStatusFavorite(favorite: Boolean) {
         if (favorite) {
-            binding.fabAdd.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_baseline_favorite_24))
+            binding.fabAdd.setImageDrawable(
+                ContextCompat.getDrawable(
+                    this,
+                    R.drawable.ic_baseline_favorite_24
+                )
+            )
         } else {
-            binding.fabAdd.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_baseline_favorite_border_24))
+            binding.fabAdd.setImageDrawable(
+                ContextCompat.getDrawable(
+                    this,
+                    R.drawable.ic_baseline_favorite_border_24
+                )
+            )
         }
     }
 }

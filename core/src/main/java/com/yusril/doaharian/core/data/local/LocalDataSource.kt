@@ -1,6 +1,5 @@
 package com.yusril.doaharian.core.data.local
 
-import androidx.lifecycle.LiveData
 import com.yusril.doaharian.core.data.local.entity.DoaEntity
 import com.yusril.doaharian.core.data.local.room.DoaDao
 import kotlinx.coroutines.flow.Flow

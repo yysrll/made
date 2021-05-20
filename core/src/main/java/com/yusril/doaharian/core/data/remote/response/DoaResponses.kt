@@ -23,6 +23,6 @@ data class DoaResponses(
     val latin: String,
 
     @field:SerializedName("translation")
-    val translation: String,
+    val translation: String
 
 )
