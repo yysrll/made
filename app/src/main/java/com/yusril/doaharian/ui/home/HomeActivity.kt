@@ -1,20 +1,19 @@
 package com.yusril.doaharian.ui.home
 
 import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.yusril.doaharian.R
 import com.yusril.doaharian.core.data.Resource
 import com.yusril.doaharian.core.ui.DoaAdapter
 import com.yusril.doaharian.databinding.ActivityHomeBinding
 import com.yusril.doaharian.ui.detail.DetailActivity
-import com.yusril.doaharian.ui.favorite.FavoriteActivity
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class HomeActivity : AppCompatActivity() {
@@ -69,8 +68,8 @@ class HomeActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when(item.itemId) {
             R.id.favorite_menu -> {
-                val i = Intent(this, FavoriteActivity::class.java)
-                startActivity(i)
+                val uri = Uri.parse("doaharian://favorite")
+                startActivity(Intent(Intent.ACTION_VIEW, uri))
                 true
             }
             else -> true

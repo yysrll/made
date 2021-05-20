@@ -1,4 +1,4 @@
-package com.yusril.doaharian.ui.favorite
+package com.yusril.doaharian.favorite.ui.favorite
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
