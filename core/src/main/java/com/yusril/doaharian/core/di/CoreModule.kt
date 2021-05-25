@@ -8,6 +8,8 @@ import com.yusril.doaharian.core.data.remote.RemoteDataSource
 import com.yusril.doaharian.core.data.remote.network.ApiService
 import com.yusril.doaharian.core.domain.repository.IDoaRepository
 import com.yusril.doaharian.core.utils.AppExecutors
+import net.sqlcipher.database.SQLiteDatabase
+import net.sqlcipher.database.SupportFactory
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.android.ext.koin.androidContext
@@ -18,10 +20,13 @@ import retrofit2.converter.gson.GsonConverterFactory
 val databaseModule = module {
     factory { get<DoaDatabase>().doaDao() }
     single {
+        val passphrase: ByteArray = SQLiteDatabase.getBytes("yusril".toCharArray())
+        val factory = SupportFactory(passphrase)
         Room.databaseBuilder(
             androidContext(),
             DoaDatabase::class.java, "doaDB"
         ).fallbackToDestructiveMigration()
+            .openHelperFactory(factory)
             .build()
     }
 }
