@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<network-security-config xmlns:tools="http://schemas.android.com/tools">
+    <domain-config cleartextTrafficPermitted="true">
+        <domain includeSubdomains="true">https://islamic-api-indonesia.herokuapp.com</domain>
+        <pin-set expiration="2024-12-24"
+            tools:ignore="MissingBackupPin">
+            <pin digest="SHA-256">Vuy2zjFSPqF5Hz18k88DpUViKGbABaF3vZx5Raghplc=</pin>
+        </pin-set>
+
+    </domain-config>
+</network-security-config>
