@@ -41,8 +41,7 @@ android {
 }
 
 dependencies {
-    implementation fileTree(dir: "libs", includes: ["*.jar"])
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     implementation "androidx.activity:activity-ktx:1.2.3"
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
